@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-size_t gnl_strlen(const char *s)
+size_t ft_strlen(const char *s)
 {
     size_t i;
 
@@ -10,7 +10,7 @@ size_t gnl_strlen(const char *s)
     return(i);
 }
 
-char    *gnl_strchr(const char *s, int c)
+char    *ft_strchr(const char *s, int c)
 {
     size_t  i;
 
@@ -27,7 +27,7 @@ char    *gnl_strchr(const char *s, int c)
         return ((char *)&s[i]);
     return (NULL);
 }
-char    *gnl_strjoin(const char *s1, const char *s2)
+char    *ft_strjoin(const char *s1, const char *s2)
 {
     char    *result;
     size_t  i;
@@ -48,8 +48,49 @@ char    *gnl_strjoin(const char *s1, const char *s2)
         result[i + j] = s2[j];
         j++;
     }
-    result[i + j] = '\0';
+    result[i + j] = '\0'; 
     return (result);
+}
+
+char    *ft_extract(const char *stash)
+{
+    char    *line;
+    size_t  len;
+    size_t  i;
+
+    len = 0;
+    while (stash[len] && stash[len] != '\0')
+        len++;
+    if(stash[len] == '\n')
+        len++;
+    line = malloc(len + 1);
+    if(!line)
+        return (NULL);
+    i = 0;
+    while (i < len)
+        line[i] = stash[i];
+        i++;
+    line[i] = '\0';
+    return (line);
+}
+
+char    *ft_keep_reset(char *stash)
+{
+    size_t i;
+    size_t j;
+
+    i = 0;
+    while (stash[i] && stash[i] != '\n')
+        i++;
+    if (stash[i] == '\n')
+        i++;
+    j = 0;
+    while (stash [j] != '\0')
+        stash[j] = stash[i];
+        i++;
+        j++;
+    stash [j] = '\0';
+    retun (stash);
 }
 #include <stdio.h>
 
